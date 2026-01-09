@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Breezy: Hyper-Growth Battle Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Tactical Neutral" - Warm gray background (#f5f5f4) with stark black (#1c1917) for contrast and strategic "Alert Orange" (#f97316) accents. Professional yet aggressive. -->
+    
+    <!-- Application Structure Plan:
+         1. Mission Brief (Header): High-level summary of the "Market Sniper" objective.
+         2. Intel Dashboard (Grid): Visualizing the "Why Now" and "Kill Shot" data (Bank Rejection Rates vs. Breezy Opportunity).
+         3. Target Acquisition (Interactive Cards): Deep dive into Phase 1 Avatars (The "Real" Audience). Click to reveal "Crisis Moment" and "Sniper Pitch".
+         4. The Sizzling Offer (Section): Phase 3 "Anti-Positioning" and Hooks.
+         5. The Multiplier Campaign (Interactive Flow): Phase 4 Strategy. Focus on Affiliate Recruitment. 
+         6. Tactical Console (Footer): Summary/Next Steps.
+         
+         Rational: This structure moves from Macro (Market) to Micro (Avatar) to Strategy (Growth), mimicking a military briefing flow.
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Market Gap (Pie Chart): Visually demonstrates the 80% Bank Rejection rate (The Opportunity). Goal: Inform & Shock.
+         2. Speed of Capital (Bar Chart): Compares Funding Timeline (Banks vs. Breezy). Goal: Compare & Highlight Advantage.
+         3. Persona Cards (Interactive Divs): "The Broad Lie" vs "The Sniper Truth". Goal: Deep Understanding of Psychographics.
+         4. Multiplier Strategy (Accordion/Step-by-Step): Breaking down the Affiliate Recruitment plan. Goal: Actionable Strategy.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+            color: #1c1917; /* stone-900 */
+        }
+        h1, h2, h3, .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .active-tab {
+            border-bottom: 2px solid #f97316;
+            color: #ea580c;
+        }
+        /* Custom scrollbar for tactical feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e7e5e4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #57534e;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Header: Mission Brief -->
+    <header class="bg-stone-900 text-stone-50 p-6 shadow-lg border-b-4 border-orange-600">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div>
+                <div class="text-orange-500 font-bold tracking-widest text-xs uppercase mb-1 mono">Classified // Market Sniper Protocol</div>
+                <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Bank Breezy <span class="font-light text-stone-400">| Battle Plan</span></h1>
+                <p class="text-stone-400 mt-2 text-sm max-w-xl">Deconstructing the "Speed Capital" model. Identifying the Blue Ocean. Deploying the Multiplier Campaign.</p>
+            </div>
+            <div class="mt-4 md:mt-0 text-right hidden md:block">
+                <div class="inline-block bg-stone-800 rounded px-4 py-2 border-l-4 border-orange-500">
+                    <div class="text-xs text-stone-500 uppercase">Current Status</div>
+                    <div class="font-bold font-mono text-orange-400 animate-pulse">DEPLOYING PHASE 4</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Navigation -->
+    <nav class="bg-white border-b border-stone-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex space-x-8 overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('phase1')" id="tab-phase1" class="tab-btn active-tab py-4 px-2 font-medium text-sm hover:text-orange-600 transition whitespace-nowrap uppercase tracking-wider">PHASE 1: The Target</button>
+                <button onclick="switchTab('phase2')" id="tab-phase2" class="tab-btn py-4 px-2 font-medium text-sm text-stone-500 hover:text-orange-600 transition whitespace-nowrap uppercase tracking-wider">PHASE 2: Market Intel</button>
+                <button onclick="switchTab('phase3')" id="tab-phase3" class="tab-btn py-4 px-2 font-medium text-sm text-stone-500 hover:text-orange-600 transition whitespace-nowrap uppercase tracking-wider">PHASE 3: The Offer</button>
+                <button onclick="switchTab('phase4')" id="tab-phase4" class="tab-btn py-4 px-2 font-medium text-sm text-stone-500 hover:text-orange-600 transition whitespace-nowrap uppercase tracking-wider">PHASE 4: The Multiplier</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl mx-auto w-full p-6 space-y-12">
+
+        <!-- Phase 1: The Real Audience -->
+        <section id="phase1" class="tab-content block">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold border-b-2 border-stone-200 pb-2 mb-4">Phase 1: The "Real" Audience (The Deep Dive)</h2>
+                <p class="text-stone-600 max-w-3xl">We don't target demographics. We target <strong>Psychographics</strong> and <strong>Bleeding Neck Problems</strong>. The generic "Small Business Owner" is a myth. We are hunting specific avatars in crisis.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- The Lie vs Truth -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-200 h-full flex flex-col justify-center">
+                    <h3 class="text-xs font-bold text-stone-400 uppercase tracking-widest mb-2">The "Broad" Lie</h3>
+                    <p class="text-xl font-serif italic text-stone-400 mb-6">"We help small business owners expand their operations."</p>
+                    
+                    <div class="w-full h-px bg-stone-200 my-4"></div>
+                    
+                    <h3 class="text-xs font-bold text-orange-600 uppercase tracking-widest mb-2">The "Sniper" Truth</h3>
+                    <p class="text-2xl font-bold text-stone-900 leading-tight">"We save asset-light gig workers and contractors who need cash within 24 hours to survive a cash-flow gap."</p>
+                </div>
+                
+                <!-- Avatar Selector -->
+                <div class="bg-stone-900 p-6 rounded-lg text-stone-50 shadow-xl">
+                    <h3 class="text-lg font-bold text-orange-500 mb-4 mono flex items-center gap-2">
+                        <span class="text-sm bg-orange-900 text-orange-200 px-2 py-0.5 rounded">SELECT TARGET</span>
+                    </h3>
+                    <div class="space-y-3">
+                        <button onclick="showAvatar('paul')" class="w-full text-left p-4 rounded bg-stone-800 hover:bg-stone-700 transition flex justify-between items-center group border border-transparent hover:border-orange-500/30">
+                            <div>
+                                <span class="block font-bold text-white">🚧 Payroll Paul</span>
+                                <span class="text-xs text-stone-400">Construction Subcontractor</span>
+                            </div>
+                            <span class="text-orange-500 opacity-0 group-hover:opacity-100 transition mono text-sm">[VIEW INTEL]</span>
+                        </button>
+                        <button onclick="showAvatar('iris')" class="w-full text-left p-4 rounded bg-stone-800 hover:bg-stone-700 transition flex justify-between items-center group border border-transparent hover:border-orange-500/30">
+                            <div>
+                                <span class="block font-bold text-white">📦 Inventory Iris</span>
+                                <span class="text-xs text-stone-400">E-com / Retail Arbitrage</span>
+                            </div>
+                            <span class="text-orange-500 opacity-0 group-hover:opacity-100 transition mono text-sm">[VIEW INTEL]</span>
+                        </button>
+                        <button onclick="showAvatar('gary')" class="w-full text-left p-4 rounded bg-stone-800 hover:bg-stone-700 transition flex justify-between items-center group border border-transparent hover:border-orange-500/30">
+                            <div>
+                                <span class="block font-bold text-white">🚗 Gig-Driver Gary</span>
+                                <span class="text-xs text-stone-400">Uber / DoorDash / Last Mile</span>
+                            </div>
+                            <span class="text-orange-500 opacity-0 group-hover:opacity-100 transition mono text-sm">[VIEW INTEL]</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Avatar Detail -->
+            <div id="avatar-detail" class="bg-white p-8 rounded-xl border-l-8 border-stone-200 shadow-lg transition-all duration-300">
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="md:col-span-1 border-r border-stone-100 pr-6">
+                        <div class="text-xs font-bold text-stone-400 uppercase tracking-wider mb-1">Target Persona</div>
+                        <h2 id="avatar-name" class="text-2xl font-extrabold text-stone-900 mb-2">Select an Avatar</h2>
+                        <div id="avatar-income" class="inline-block bg-stone-100 px-3 py-1 rounded text-stone-600 font-mono text-xs font-bold uppercase tracking-tight">Income: --</div>
+                    </div>
+                    <div class="md:col-span-2 space-y-6">
+                        <div>
+                            <h4 class="font-bold text-red-600 flex items-center gap-2 text-sm uppercase tracking-wide mb-1">
+                                <span class="text-lg">⚠️</span> The Crisis Moment
+                            </h4>
+                            <p id="avatar-crisis" class="text-stone-700 text-lg leading-relaxed">Select an avatar above to see their bleeding neck problem.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-green-600 flex items-center gap-2 text-sm uppercase tracking-wide mb-1">
+                                <span class="text-lg">🎯</span> The Sniper Pitch
+                            </h4>
+                            <p id="avatar-pitch" class="text-stone-900 font-medium bg-green-50 p-4 rounded-lg border border-green-100 italic">Select an avatar above to see the winning hook.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 2: Market Intelligence -->
+        <section id="phase2" class="tab-content hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold border-b-2 border-stone-200 pb-2 mb-4">Phase 2: Market Intelligence Report</h2>
+                <p class="text-stone-600">The "Big Guys" (Traditional Banks) are ignoring this niche. Their algorithms are broken for the gig economy. This is our advantage.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                <!-- Chart 1: The Opportunity Gap -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-stone-100">
+                    <div class="text-center mb-6">
+                        <h3 class="text-lg font-bold text-stone-900">The "Kill Shot" Data</h3>
+                        <p class="text-xs text-stone-500 uppercase tracking-widest">Bank Rejection Rates</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="rejectionChart"></canvas>
+                    </div>
+                    <div class="mt-6 p-4 bg-orange-50 border-l-4 border-orange-500 text-sm text-stone-700">
+                        <strong>Insight:</strong> 80% of small business applications are rejected by traditional banks. This "Rejected 80%" is our <strong>Total Addressable Market</strong>.
+                    </div>
+                </div>
+
+                <!-- Analysis Text -->
+                <div class="space-y-6">
+                    <div class="bg-stone-100 p-6 rounded-lg">
+                        <h3 class="text-stone-900 font-bold mb-3 flex items-center gap-2">
+                            <span class="bg-stone-900 text-white w-6 h-6 flex items-center justify-center rounded-full text-xs mono">?</span> 
+                            Why Now?
+                        </h3>
+                        <div class="space-y-4 text-sm text-stone-600">
+                            <p><strong class="text-stone-900">1. The "1099" Explosion:</strong> The economy has shifted to gig work, but bank lending models are stuck in 1990 (W2 focus). They can't underwrite a driver.</p>
+                            <p><strong class="text-stone-900">2. Inflationary Pressure:</strong> Material costs are up. Cash flow gaps are wider. Businesses are profitable but cash-poor.</p>
+                            <p><strong class="text-stone-900">3. The "Speed" Premium:</strong> In a digital world, waiting 30 days for a "Maybe" from a bank is a death sentence. Speed is the new currency.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-stone-800 text-stone-300 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-white font-bold mb-4 mono text-center border-b border-stone-700 pb-2">COMPETITOR GAP ANALYSIS</h3>
+                        <ul class="space-y-4 text-sm">
+                            <li class="flex items-start gap-3">
+                                <span class="text-red-500 text-lg leading-none">✖</span>
+                                <div>
+                                    <strong class="text-stone-100 block">Big Banks (Chase/Wells)</strong>
+                                    <span class="text-stone-400 text-xs">Too slow (2-4 weeks). Require collateral. Require 700+ FICO.</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-yellow-500 text-lg leading-none">✖</span>
+                                <div>
+                                    <strong class="text-stone-100 block">Fintech Giants (OnDeck/Kabbage)</strong>
+                                    <span class="text-stone-400 text-xs">Have tightened criteria. Often ignore &lt;$25k revenue/year (Micro-biz).</span>
+                                </div>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-green-500 text-lg leading-none">✔</span>
+                                <div>
+                                    <strong class="text-white block">Bank Breezy (The Sniper)</strong>
+                                    <span class="text-orange-400 text-xs">Focuses on "Micro" (&lt;$25k). Daily Pay accepted. No collateral. Funds in 24h.</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-white p-6 rounded-lg shadow-sm border border-stone-100">
+                 <h3 class="text-lg font-bold text-stone-800 mb-4 text-center">Time to Funding Comparison</h3>
+                 <div class="chart-container h-64">
+                    <canvas id="speedChart"></canvas>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Phase 3: Sizzling Offer -->
+        <section id="phase3" class="tab-content hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold border-b-2 border-stone-200 pb-2 mb-4">Phase 3: The "Sizzling" Offer & Positioning</h2>
+                <p class="text-stone-600">Stop selling "loans". Loans are debt. Debt is scary. Sell "Speed" and "Flow".</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Anti-Positioning -->
+                <div class="bg-stone-900 text-stone-100 p-8 rounded-xl relative overflow-hidden group shadow-xl">
+                    <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-orange-500 rounded-full opacity-20 group-hover:scale-150 transition duration-700 ease-out"></div>
+                    <h3 class="text-xl font-bold mb-6 mono text-orange-500">The Anti-Positioning</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <p class="text-xs text-stone-500 uppercase tracking-widest mb-1">The Status Quo</p>
+                            <p class="text-stone-400 line-through">"Apply for a business loan."</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-orange-500 uppercase tracking-widest mb-1">The New Way</p>
+                            <p class="text-xl font-bold text-white border-l-4 border-orange-500 pl-4">"Revenue Acceleration"</p>
+                        </div>
+                    </div>
+                    <p class="mt-6 text-sm text-stone-400 leading-relaxed">Position the money not as a liability, but as fuel for an immediate opportunity (buying stock, fixing a truck). It's an asset, not a debt.</p>
+                </div>
+
+                <!-- The Hooks -->
+                <div class="md:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-stone-200">
+                    <h3 class="text-xl font-bold text-stone-800 mb-6 flex items-center gap-2">
+                        <span class="text-xl">🪝</span> The "Stop the Scroll" Hooks
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="p-5 bg-stone-50 rounded-lg border-l-4 border-stone-800 hover:bg-stone-100 transition">
+                            <h4 class="font-bold text-stone-900 text-xs uppercase mb-1">Hook #1 (The Enemy)</h4>
+                            <p class="text-stone-700 font-serif text-lg italic">"Denied by Chase? Good. We prefer 'High Risk' hustlers anyway."</p>
+                        </div>
+                        <div class="p-5 bg-stone-50 rounded-lg border-l-4 border-stone-800 hover:bg-stone-100 transition">
+                            <h4 class="font-bold text-stone-900 text-xs uppercase mb-1">Hook #2 (The Benefit)</h4>
+                            <p class="text-stone-700 font-serif text-lg italic">"Funds in your account before your morning coffee cools. No paperwork. No judgment."</p>
+                        </div>
+                        <div class="p-5 bg-stone-50 rounded-lg border-l-4 border-stone-800 hover:bg-stone-100 transition">
+                            <h4 class="font-bold text-stone-900 text-xs uppercase mb-1">Hook #3 (The Outcome)</h4>
+                            <p class="text-stone-700 font-serif text-lg italic">"Your Credit Score is History. Your Revenue is the Future. Get up to $25k based on your sales, not your FICO."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Unfair Advantage -->
+            <div class="mt-8 bg-gradient-to-r from-orange-600 to-orange-500 text-white p-8 rounded-lg text-center shadow-lg relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold mb-2">The "Meet or Beat" Guarantee</h3>
+                    <p class="text-orange-100 text-lg max-w-2xl mx-auto mb-6">We don't just fund. We guarantee the best deal. If a competitor offers a better rate, we match it or beat it. This removes the "shopping around" objection instantly.</p>
+                    <button class="bg-white text-orange-700 font-bold py-3 px-8 rounded shadow-lg transform hover:scale-105 transition duration-200">
+                        Deploy "Meet or Beat" Script
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phase 4: The Multiplier Campaign -->
+        <section id="phase4" class="tab-content hidden">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold border-b-2 border-stone-200 pb-2 mb-4">Phase 4: The "Multiplier" Campaign (Affiliate Recruitment)</h2>
+                <p class="text-stone-600">Stop hunting for borrowers one by one. Hunt for the "Gatekeepers" who control 100 borrowers. This is the 10X growth lever.</p>
+            </div>
+
+            <!-- Campaign Visualizer -->
+            <div class="bg-white p-8 rounded-xl shadow-sm border border-stone-200 mb-8">
+                <h3 class="text-center font-bold text-stone-800 text-xl mb-8 uppercase tracking-widest">The Ecosystem of Influence</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center relative">
+                    <!-- Node 1 -->
+                    <div class="p-6 bg-stone-50 rounded-xl border-2 border-dashed border-stone-300 relative z-10 hover:border-orange-300 transition cursor-pointer group" onclick="showTactic('tax')">
+                        <div class="text-4xl mb-3 group-hover:scale-110 transition">👮</div>
+                        <h4 class="font-bold text-stone-900">Tax Preparers (CPAs)</h4>
+                        <p class="text-xs text-stone-500 mt-2">"Your client owes the IRS? Offer them a funding line to pay it instantly."</p>
+                        <span class="block mt-4 text-xs font-bold text-orange-600 opacity-0 group-hover:opacity-100 uppercase">Click for Script</span>
+                    </div>
+
+                    <!-- Node 2 (Central) -->
+                    <div class="p-6 bg-orange-50 rounded-xl border-2 border-orange-500 transform md:scale-105 z-20 shadow-xl flex flex-col justify-center items-center">
+                        <div class="text-5xl mb-3">🏦</div>
+                        <h4 class="font-bold text-orange-800">YOU (The Hub)</h4>
+                        <p class="text-xs text-orange-700 mt-2">You provide the "White Label" funding solution to these partners.</p>
+                    </div>
+
+                    <!-- Node 3 -->
+                    <div class="p-6 bg-stone-50 rounded-xl border-2 border-dashed border-stone-300 relative z-10 hover:border-orange-300 transition cursor-pointer group" onclick="showTactic('agency')">
+                        <div class="text-4xl mb-3 group-hover:scale-110 transition">📈</div>
+                        <h4 class="font-bold text-stone-900">Marketing Agencies</h4>
+                        <p class="text-xs text-stone-500 mt-2">"Client can't afford ads? Get them funded so they can pay you."</p>
+                        <span class="block mt-4 text-xs font-bold text-orange-600 opacity-0 group-hover:opacity-100 uppercase">Click for Script</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Tactic Display -->
+            <div id="tactic-display" class="bg-stone-900 text-stone-300 p-8 rounded-lg font-mono text-sm hidden animate-fade-in shadow-2xl border border-stone-700">
+                <div class="flex justify-between items-center border-b border-stone-700 pb-4 mb-4">
+                    <h4 id="tactic-title" class="text-orange-500 font-bold text-lg">PARTNERSHIP SCRIPT</h4>
+                    <span class="text-xs text-stone-500">CONFIDENTIAL // COPY TO CLIPBOARD</span>
+                </div>
+                <div id="tactic-content" class="whitespace-pre-wrap leading-relaxed text-stone-100 font-light">Select a partner above to load the tactical script.</div>
+            </div>
+
+            <!-- Content Plan Table -->
+            <div class="mt-12">
+                <h3 class="font-bold text-stone-800 text-lg mb-4">The "Search Hijack" Content Plan</h3>
+                <div class="overflow-x-auto rounded-lg border border-stone-200">
+                    <table class="w-full text-sm text-left text-stone-600">
+                        <thead class="text-xs text-stone-700 uppercase bg-stone-100">
+                            <tr>
+                                <th class="px-6 py-3">Target Keyword</th>
+                                <th class="px-6 py-3">Headline (The Hook)</th>
+                                <th class="px-6 py-3">The Angle</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-white border-b hover:bg-stone-50 transition">
+                                <td class="px-6 py-4 font-bold text-stone-900">SBA Loan Denied</td>
+                                <td class="px-6 py-4">"SBA Said No? Here's Plan B (Funds in 24h)."</td>
+                                <td class="px-6 py-4"><span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Rejection Rescue</span></td>
+                            </tr>
+                            <tr class="bg-white border-b hover:bg-stone-50 transition">
+                                <td class="px-6 py-4 font-bold text-stone-900">Business Credit Bad</td>
+                                <td class="px-6 py-4">"How to stack $25k with a 500 Credit Score."</td>
+                                <td class="px-6 py-4"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Revenue > Credit</span></td>
+                            </tr>
+                            <tr class="bg-white hover:bg-stone-50 transition">
+                                <td class="px-6 py-4 font-bold text-stone-900">Startup Funding</td>
+                                <td class="px-6 py-4">"Amex vs. Bank Breezy: Which approves gig workers faster?"</td>
+                                <td class="px-6 py-4"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Comparative Speed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-500 py-12 mt-12 border-t border-stone-800">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
+            <div>
+                <h4 class="text-stone-100 font-bold mb-4 tracking-widest text-xs uppercase">MARKET SNIPER PROTOCOL</h4>
+                <p class="text-sm leading-relaxed max-w-sm">This battle plan is confidential. Execute with extreme prejudice. Focus on speed, frictionless experience, and solving immediate cash-flow crises.</p>
+            </div>
+            <div class="text-right">
+                <p class="text-xs font-mono">GENERATED BY CANVAS CREATE WEBAPP</p>
+                <p class="text-xs font-mono mt-1">SOURCE: INDEPENDENT BROKER MANUAL</p>
+                <div class="mt-4">
+                    <span class="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></span>
+                    <span class="text-xs text-stone-400">SYSTEM OPERATIONAL</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA STORAGE ---
+        const avatars = {
+            paul: {
+                name: "Payroll Paul (Construction Sub)",
+                income: "$15k - $30k / month (lumpy)",
+                crisis: "It's Thursday. General Contractor's check hasn't cleared. He needs $4,500 by Friday 5 PM or his crew walks off the job. He doesn't have time for a bank application.",
+                pitch: "\"Paul, keep your crew on the job. We'll advance you $5k against that pending invoice. Money in your account tomorrow morning. Pay us back when the GC pays you.\""
+            },
+            iris: {
+                name: "Inventory Iris (E-com/Retail)",
+                income: "$20k / month (seasonal)",
+                crisis: "Supplier just announced a 40% flash sale on inventory, but it ends in 24 hours. She doesn't have the liquidity to buy in bulk, missing out on massive margin.",
+                pitch: "\"Iris, don't miss that 40% margin. We'll fund the inventory purchase today. You sell the goods, keep the profit, and pay back the advance. It's not debt, it's leverage.\""
+            },
+            gary: {
+                name: "Gig-Driver Gary (Uber/DoorDash)",
+                income: "$4k / month",
+                crisis: "Transmission blew. Repair quote is $1,800. Every day the car is in the shop, he makes $0. Banks laugh at his 'gig income'.",
+                pitch: "\"Gary, get back on the road. We link to your bank account, see your Uber deposits, and fund you based on that history. Fix the car today, drive tomorrow.\""
+            }
+        };
+
+        const tactics = {
+            tax: "SUBJECT: Help your clients pay their IRS bill\n\nHey [Name],\n\nI know tax season is brutal. You probably have clients right now staring at a tax bill they can't pay.\n\nInstead of watching them panic, what if you could offer them a funding line on the spot to cover it?\n\nI partner with CPAs to provide 'Tax Payment Capital' for businesses. Approvals in hours, not weeks. It makes you the hero and solves their problem instantly.\n\nOpen to a 5-min chat on how it works?",
+            agency: "SUBJECT: The client you're about to lose...\n\nHey [Name],\n\nWe both know the worst feeling: A client loves your marketing pitch but says, 'I just don't have the budget for ads right now.'\n\nI fix that objection.\n\nI help Agencies close more deals by financing their clients' ad spend. You get the retainer + ad budget. The client gets the growth. I handle the funding.\n\nLet's turn your 'No budget' prospects into 'Paid in Full' clients."
+        };
+
+        // --- INTERACTION LOGIC ---
+
+        // Tab Switching
+        function switchTab(tabId) {
+            // Hide all contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('block');
+            });
+            // Show selected
+            const selected = document.getElementById(tabId);
+            selected.classList.remove('hidden');
+            selected.classList.add('block');
+            
+            // Update buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active-tab', 'text-orange-600');
+                btn.classList.add('text-stone-500');
+            });
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.classList.add('active-tab', 'text-orange-600');
+            activeBtn.classList.remove('text-stone-500');
+
+            // Trigger charts if entering Phase 2
+            if(tabId === 'phase2') {
+                renderCharts();
+            }
+        }
+
+        // Avatar Display
+        function showAvatar(key) {
+            const data = avatars[key];
+            document.getElementById('avatar-name').innerText = data.name;
+            document.getElementById('avatar-income').innerText = "Revenue: " + data.income;
+            document.getElementById('avatar-crisis').innerText = data.crisis;
+            document.getElementById('avatar-pitch').innerText = data.pitch;
+            
+            // Visual feedback on detail box
+            const detailBox = document.getElementById('avatar-detail');
+            detailBox.classList.remove('animate-pulse');
+            // Remove border color class if it exists and reset
+            detailBox.className = "bg-white p-8 rounded-xl border-l-8 border-orange-500 shadow-lg transition-all duration-300";
+            
+            void detailBox.offsetWidth; // trigger reflow
+            detailBox.classList.add('animate-pulse');
+            setTimeout(() => detailBox.classList.remove('animate-pulse'), 500);
+        }
+
+        // Tactic Display
+        function showTactic(key) {
+            const display = document.getElementById('tactic-display');
+            const content = document.getElementById('tactic-content');
+            const title = document.getElementById('tactic-title');
+            
+            display.classList.remove('hidden');
+            display.classList.add('block');
+            title.innerText = key === 'tax' ? "TACTIC: THE CPA PARTNERSHIP" : "TACTIC: THE AGENCY RETAINER RESCUE";
+            content.innerText = tactics[key];
+            
+            // Smooth scroll
+            display.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Chart Rendering (Chart.js)
+        let chartsRendered = false;
+
+        function renderCharts() {
+            if (chartsRendered) return;
+            
+            // Chart 1: Rejection Rates (Pie)
+            const ctx1 = document.getElementById('rejectionChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Rejected by Banks (The Blue Ocean)', 'Approved by Banks'],
+                    datasets: [{
+                        data: [80, 20],
+                        backgroundColor: ['#f97316', '#e7e5e4'], // Orange-500, Stone-200
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ' ' + context.label + ': ' + context.raw + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Speed Comparison (Bar)
+            const ctx2 = document.getElementById('speedChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Traditional Bank', 'Bank Breezy'],
+                    datasets: [{
+                        label: 'Days to Funding',
+                        data: [28, 1],
+                        backgroundColor: ['#78716c', '#f97316'], // Stone-500, Orange-500
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Days' } }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            chartsRendered = true;
+        }
+
+        // Initialize Phase 1
+        showAvatar('paul');
+
+    </script>
+</body>
+</html>
